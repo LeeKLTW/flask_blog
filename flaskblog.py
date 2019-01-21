@@ -2,6 +2,7 @@ from flask import Flask,render_template
 
 app = Flask(__name__)
 
+title = 'Paper'
 posts = [
     {'author': 'Sutskever et al',
      'title': 'Sequence to sequence learning with neural networks',
@@ -24,9 +25,7 @@ def home():
 
 @app.route("/about")
 def about():
-    return """
-    <h1>About page</h1>
-    """
+    return render_template('about.html',title=title)
 
 
 if __name__ == "__main__":
