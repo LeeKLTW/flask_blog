@@ -1,18 +1,9 @@
-# encoding: utf-8
-from flask import Flask
-from flask_restful import abort
-from datetime import datetime
-from pytz import utc
+from flask import Flask, request, jsonify
 
-from models import MessageModel
-import status
+app = Flask(__name__)
 
 
-class MessageManager():
-    last_id = 0
-    def __init__(self):
-        self.messages = {}
+@app.route('/api/messages/<int: id>')
+def get_messages(id):
+    received_request = request.get_json()
 
-
-if __name__ == '__main__':
-    pass
