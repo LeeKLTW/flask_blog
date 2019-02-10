@@ -1,3 +1,4 @@
+
 class MessageModel:
     def __init__(self,message, duration, creation_date, message_category):
         self.id = 0
