@@ -1,12 +1,21 @@
 # encoding: utf-8
 from flask import Flask, render_template, url_for, flash, redirect
+from flask_sqlalchemy import SQLAlchemy
 from forms import RegistrationForm, LoginForm
 
 app = Flask(__name__)
 
-# import secrets
-# secrets.token_hex(16)
 app.config['SECRET_KEY'] = '33f0baa056c172061e5b2394b9cb9915'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+
+db = SQLAlchemy(app)
+
+class User(db.Model):
+    pass
+
+class Post(db.Model):
+    pass
+
 
 posts = [
     {
