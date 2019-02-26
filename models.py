@@ -1,8 +1,6 @@
 # encoding: utf-8
 from datetime import datetime
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_blog import db
+from __main__ import db
 
 
 class User(db.Model):
