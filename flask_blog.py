@@ -1,3 +1,14 @@
+"""
+in cmd
+python3.6
+from flask_blog import db
+
+
+=>
+from __main__ import db
+ImportError: cannot import name 'db'
+"""
+
 # encoding: utf-8
 from flask import Flask, render_template, redirect, url_for, flash
 from forms import RegistrationForm, LoginForm
