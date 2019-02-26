@@ -39,15 +39,19 @@ def about():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-        flash(f'Account {form.username.data} registered successfully.',category='success')
+        flash(f'Account {form.username.data} registered successfully.', category='success')
         return redirect(url_for('home'))
     return render_template('register.html', title='Register', form=form)
 
 
-
 @app.route("/login", methods=['GET', 'POST'])
 def login():
-    form = RegistrationForm()
+    form = LoginForm()
+    if form.email.data == 'admin@blog.com' and form.password.data == '123':
+        flash(f'Account {form.email.data} Logged in.', 'success')
+        return redirect(url_for('home'))
+    else:
+        flash(f'not correct','danger')
     return render_template('login.html', title='Login', form=form)
 
 
