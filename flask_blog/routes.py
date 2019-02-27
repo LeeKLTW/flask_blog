@@ -1,6 +1,6 @@
 # encoding: utf-8
 from flask import render_template, redirect, url_for, flash, request
-from flask_blog.forms import RegistrationForm, LoginForm
+from flask_blog.forms import RegistrationForm, LoginForm, UpdateAccountForm
 from flask_blog.models import Post, User
 from flask_blog import app, db, bcrypt
 from flask_login import login_user, current_user, logout_user, login_required
@@ -73,6 +73,6 @@ def logout():
 @app.route("/account", methods=['GET', 'POST'])
 @login_required
 def account():
-    print(f'./profile_pics/{current_user.image_file}')
-    img_file = url_for('static',filename=f'./profile_pics/{current_user.image_file}')
-    return render_template('account.html', title='Account', img_file=img_file)
+    form = UpdateAccountForm()
+    img_file = url_for('static', filename=f'./profile_pics/{current_user.image_file}')
+    return render_template('account.html', title='Account', img_file=img_file, form=form)
