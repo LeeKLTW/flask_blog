@@ -1,17 +1,6 @@
 # encoding: utf-8
 from datetime import datetime
-from __main__ import db
-"""
-in cmd
-python3.6
 from flask_blog import db
-
-
-=>
-from __main__ import db
-ImportError: cannot import name 'db'
-"""
-
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
