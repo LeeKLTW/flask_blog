@@ -1,15 +1,18 @@
 # encoding: utf-8
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from flask_blog.models import User
 from flask_login import current_user
+
 
 class RegistrationForm(FlaskForm):
     username = StringField(label='Username', validators=[DataRequired(), Length(min=2, max=10)])
     email = StringField(label='Email', validators=[DataRequired(), Email()])
     password = PasswordField(label='Password', validators=[DataRequired()])
     confirm_password = PasswordField(label='Confirm Password', validators=[DataRequired(), EqualTo('password')])
+    picture = FileField(label='Update Profile Picture', validators=[FileAllowed(upload_set=['jpg', 'png'])])
     submit = SubmitField(label='Sign up')
 
     def validate_username(self, username):
@@ -26,6 +29,7 @@ class RegistrationForm(FlaskForm):
 class UpdateAccountForm(FlaskForm):
     username = StringField(label='Username', validators=[DataRequired(), Length(min=2, max=10)])
     email = StringField(label='Email', validators=[DataRequired(), Email()])
+    picture = FileField(label='Update Profile Picture', validators=[FileAllowed(upload_set=['jpg', 'png'])])
     submit = SubmitField(label='Update')
 
     def validate_username(self, username):
