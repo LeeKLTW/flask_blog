@@ -33,13 +33,13 @@ class UpdateAccountForm(FlaskForm):
     submit = SubmitField(label='Update')
 
     def validate_username(self, username):
-        if username != current_user.username:
+        if username.data != current_user.username:
             user = User.query.filter_by(username=username.data).first()
             if user:
                 raise ValidationError('username is taken.')
 
     def validate_email(self, email):
-        if email != current_user.email:
+        if email.data != current_user.email:
             user = User.query.filter_by(email=email.data).first()
             if user:
                 raise ValidationError('email is taken.')
