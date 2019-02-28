@@ -40,8 +40,6 @@ class UpdateAccountForm(FlaskForm):
             if user:
                 raise ValidationError('email is taken.')
 
-        pass
-
 
 class LoginForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
