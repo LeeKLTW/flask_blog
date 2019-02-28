@@ -1,4 +1,7 @@
 # encoding: utf-8
+import os
+import secrets
+from PIL import Image
 from flask import render_template, redirect, url_for, flash, request
 from flask_blog.forms import RegistrationForm, LoginForm, UpdateAccountForm
 from flask_blog.models import Post, User
@@ -70,11 +73,21 @@ def logout():
     return redirect(url_for('home'))
 
 
+def save_picture(form_picture):
+    random_hex = secrets.token_hex(8)
+    _, file_extension = os.path.splitext(form_picture.filename)
+    picture_filename = random_hex + file_extension
+    picture_path = os.path.join(app.root_path,'static/profile_pics',picture_filename)
+    return picture_path
+
 @app.route("/account", methods=['GET', 'POST'])
 @login_required
 def account():
     form = UpdateAccountForm()
     if form.validate_on_submit():
+        if form.picture.data:
+            picture_file = save_picture(form.picture.data)
+            current_user.image_file = picture_file
         current_user.username = form.username.data
         current_user.email = form.email.data
         db.session.commit()
