@@ -1,4 +1,4 @@
-#!/Users/LeeKunLin/Legacy_code/flask_blog/ENV/bin/python
+#!/home/ec2-user/flask_blog/ENV/bin/python
 
 import sys
 import getopt
