@@ -1,4 +1,5 @@
-#!/home/ec2-user/flask_blog/ENV/bin/python3
+#!/Users/LeeKunLin/Legacy_code/flask_blog/ENV/bin/python3.6
+
 # -*- coding: utf-8 -*-
 import re
 import sys
