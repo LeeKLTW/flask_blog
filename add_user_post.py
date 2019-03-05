@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 # from flask_blog import db
+# db.create_all()
 # from flask_blog import User, Post
 #
 # user_list = [{'username':'Kevin', 'email':'Kevin@gmail.com','password':'password'}]
