@@ -112,3 +112,12 @@ def account():
     image_file = os.path.join('static','profile_pics',image_file)
 
     return render_template('account.html', title='Account',image_file=image_file, form=form)
+
+
+@app.route("/post/new")
+def new_post():
+    return render_template("create_post.html",title="New Post")
+
+
+
+

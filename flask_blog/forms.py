@@ -1,7 +1,7 @@
 # encoding: utf-8
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from flask_blog.models import User
 from flask_login import current_user
@@ -50,3 +50,7 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     remember = BooleanField('Remember Me.')
     submit = SubmitField('Login')
+
+
+class PostForm(FlaskForm):
+    title = StringField(label="Title",validators=[DataRequired()])
