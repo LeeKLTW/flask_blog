@@ -54,3 +54,5 @@ class LoginForm(FlaskForm):
 
 class PostForm(FlaskForm):
     title = StringField(label="Title",validators=[DataRequired()])
+    content = TextAreaField(label='Contnet',validators=[DataRequired])
+    submit = SubmitField(label='Post')
