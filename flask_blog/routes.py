@@ -3,11 +3,10 @@ import os
 import secrets
 from PIL import Image
 from flask import render_template, redirect, url_for, flash, request
-from flask_blog.forms import RegistrationForm, LoginForm, UpdateAccountForm
+from flask_blog.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm
 from flask_blog.models import Post, User
 from flask_blog import app, db, bcrypt
 from flask_login import login_user, current_user, logout_user, login_required
-
 
 posts = [
     {
@@ -78,16 +77,17 @@ def save_picture(form_picture):
     random_hex = secrets.token_hex(8)
     _, file_extension = os.path.splitext(form_picture.filename)
     picture_filename = random_hex + file_extension
-    picture_path = os.path.join(app.root_path,'static/profile_pics', picture_filename)
+    picture_path = os.path.join(app.root_path, 'static/profile_pics', picture_filename)
     form_picture.save(picture_path)
-    print('form_picture path',form_picture)
+    print('form_picture path', form_picture)
 
-    OUTPUT_SIZE = (125,125)
+    OUTPUT_SIZE = (125, 125)
     i = Image.open(form_picture)
     i.thumbnail(OUTPUT_SIZE)
     i.save(picture_path)
 
     return picture_path
+
 
 @app.route("/account", methods=['GET', 'POST'])
 @login_required
@@ -100,7 +100,7 @@ def account():
         current_user.username = form.username.data
         current_user.email = form.email.data
         db.session.commit()
-        flash('Your account has been updated', category='success')
+        flash('Your account has been updated', category='success') # 'success' is boostrap
         return redirect(url_for('account'))  # This is needed to avoid POST again
 
     # Show current data in form
@@ -109,15 +109,16 @@ def account():
         form.email.data = current_user.email
 
     image_file = os.path.split(current_user.image_file)[-1]
-    image_file = os.path.join('static','profile_pics',image_file)
+    image_file = os.path.join('static', 'profile_pics', image_file)
 
-    return render_template('account.html', title='Account',image_file=image_file, form=form)
+    return render_template('account.html', title='Account', image_file=image_file, form=form)
 
 
-@app.route("/post/new")
+@app.route("/post/new", methods=['GET', 'POST'])
+@login_required
 def new_post():
-    return render_template("create_post.html",title="New Post")
-
-
-
-
+    form = PostForm()
+    if form.validate_on_submit():
+        flash(message='Your post has been created',category='success') # 'success' is boostrap
+        return redirect(url_for('home'))
+    return render_template("create_post.html", title="New Post", form=form)
