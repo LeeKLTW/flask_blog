@@ -119,6 +119,9 @@ def account():
 def new_post():
     form = PostForm()
     if form.validate_on_submit():
+        post = Post(title=form.title.data,content=form.content.data, author=current_user)
+        db.session.add(post)
+        db.session.commit()
         flash(message='Your post has been created',category='success') # 'success' is boostrap
         return redirect(url_for('home'))
     return render_template("create_post.html", title="New Post", form=form)
