@@ -100,7 +100,7 @@ def account():
         current_user.username = form.username.data
         current_user.email = form.email.data
         db.session.commit()
-        flash('Your account has been updated', category='success') # 'success' is boostrap
+        flash('Your account has been updated', category='success')  # 'success' is boostrap
         return redirect(url_for('account'))  # This is needed to avoid POST again
 
     # Show current data in form
@@ -119,9 +119,9 @@ def account():
 def new_post():
     form = PostForm()
     if form.validate_on_submit():
-        post = Post(title=form.title.data,content=form.content.data, author=current_user)
+        post = Post(title=form.title.data, content=form.content.data, author=current_user)
         db.session.add(post)
         db.session.commit()
-        flash(message='Your post has been created',category='success') # 'success' is boostrap
+        flash(message='Your post has been created', category='success')  # 'success' is boostrap
         return redirect(url_for('home'))
     return render_template("create_post.html", title="New Post", form=form)
