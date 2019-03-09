@@ -126,6 +126,7 @@ def new_post():
         return redirect(url_for('home'))
     return render_template("create_post.html", title="New Post", form=form)
 
+
 @app.route("post/<int: post_id>")
 def post(post_id):
     pass
