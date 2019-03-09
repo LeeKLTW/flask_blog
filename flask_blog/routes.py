@@ -125,3 +125,7 @@ def new_post():
         flash(message='Your post has been created', category='success')  # 'success' is boostrap
         return redirect(url_for('home'))
     return render_template("create_post.html", title="New Post", form=form)
+
+@app.route("post/<int: post_id>")
+def post(post_id):
+    pass
