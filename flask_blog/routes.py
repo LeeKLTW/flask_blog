@@ -13,7 +13,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 @app.route("/home")
 def home():
     posts = Post.query.all()
-    return render_template('home.html', posts=posts)
+    return render_template('home.html', posts=posts, os=os)
 
 
 @app.route("/about")
@@ -111,7 +111,6 @@ def new_post():
         flash(message='Your post has been created', category='success')  # 'success' is boostrap
         return redirect(url_for('home'))
     return render_template("create_post.html", title="New Post", form=form)
-
 
 # @app.route("/post/<int: post_id>")
 # def post(post_id):
