@@ -5,6 +5,7 @@ def outer_func():
     def inner_func():
         print(message)
 
-    return inner_func()
+    return inner_func
 
 outer_func()
+outer_func()()
